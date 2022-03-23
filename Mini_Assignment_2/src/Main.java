@@ -1,10 +1,7 @@
 package selenium_basic;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import java.util.Iterator;
 import java.util.Set;
 
@@ -18,12 +15,16 @@ public class Main {
         driver.get("https://google.co.in");
         driver.manage().window().maximize();
         driver.get("https://phptravels.com/demo");
-        String parentwindow=driver.getWindowHandle();
         String s=driver.getTitle();
         compare(s);
         By login=By.xpath("//section[1]/div/div/div[2]/div/div/div[2]/div/div/div[1]/div/a/small");
         driver.findElement(login).click();
         Thread.sleep(5000);
+        Set<String> window=driver.getWindowHandles();
+        Iterator<String> it = window.iterator();
+        String p=it.next();
+        String c=it.next();
+        driver.switchTo().window(c);
         String s2=driver.getTitle();
         if(s.compareTo(s2)==0)
         {
@@ -32,7 +33,7 @@ public class Main {
         else{
             System.out.println("Fail");
         }
-        driver.switchTo().window(parentwindow);
+        driver.switchTo().window(p);
         System.out.println(driver.getCurrentUrl());
         By pricing=By.xpath("//a[text()='Pricing']");
         driver.findElement(pricing).click();
