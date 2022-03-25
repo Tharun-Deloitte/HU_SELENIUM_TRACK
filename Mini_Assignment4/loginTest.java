@@ -21,10 +21,11 @@ public class loginTest {
     CartPage c;
 
     @BeforeClass
-    public static void aset_up() throws  IOException {
+    public static void aset_up() throws IOException, InterruptedException {
         System.setProperty("webdriver.chrome.driver", "C:\\selenium\\chromedriver_win32\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("https://www.google.co.in");
+        Thread.sleep(5000);
         driver.get("https://www.saucedemo.com/");
         driver.manage().window().maximize();
         System.out.println(driver.getTitle());
@@ -68,14 +69,20 @@ public class loginTest {
         }
         h.addtocart_enabled(low);
         h.AddtoCart(low);
-        c.click_continue_to_shopping();
+        h.click_Cart();
     }
 
-
-
-
-
-
+    @Test
+    public void check4(){
+        c=new CartPage(driver);
+        c.check_out();
+        c.first_name();
+        c.last_name();
+        c.pincode();
+        c.click_continue();
+        c.Finish();
+        c.Msg();
+    }
 
     @AfterClass
     public void end(){

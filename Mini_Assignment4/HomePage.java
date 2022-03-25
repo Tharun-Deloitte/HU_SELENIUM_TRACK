@@ -11,11 +11,9 @@ import java.util.List;
 
 public class HomePage {
     WebDriver driver;
-    List<WebElement> li;
-    List<WebElement> pr;
-    ArrayList<String> name=new ArrayList<>();
-    By cart=By.xpath("//a[@class='shopping_cart_link']");
 
+    By cart=By.xpath("//a[@class='shopping_cart_link']");
+    static ArrayList<String> name=new ArrayList<>();
 
 
     public HomePage(WebDriver driver)
@@ -24,6 +22,8 @@ public class HomePage {
     }
 
     public  int gethighprice() throws InterruptedException {
+        List<WebElement> li;
+        List<WebElement> pr;
         li = driver.findElements(By.xpath("//div[@class='inventory_item_name']"));
         for (WebElement webElement : li) {
             String str = webElement.getText();
@@ -49,12 +49,13 @@ public class HomePage {
     public int getlowerprice() throws InterruptedException {
         List<WebElement> li;
         List<WebElement> pr;
-        ArrayList<String> name=new ArrayList<>();
+
         li = driver.findElements(By.xpath("//div[@class='inventory_item_name']"));
         for (WebElement webElement : li) {
             String str = webElement.getText();
-            name.add(str.replace(" ", "-").toLowerCase());
+            System.out.println(str.replace(" ", "-").toLowerCase());
         }
+        System.out.println(name);
         pr = driver.findElements(By.xpath("//div[@class='inventory_item_price']"));
         Thread.sleep(3000);
         float check=100;
