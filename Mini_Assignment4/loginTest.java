@@ -3,12 +3,11 @@ package test;
 import Assignment_4.CartPage;
 import Assignment_4.HomePage;
 import Assignment_4.login;
-import org.checkerframework.checker.units.qual.C;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import java.io.IOException;
 
@@ -20,7 +19,7 @@ public class loginTest {
     HomePage h;
     CartPage c;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public static void aset_up() throws IOException, InterruptedException {
         System.setProperty("webdriver.chrome.driver", "C:\\selenium\\chromedriver_win32\\chromedriver.exe");
         driver = new ChromeDriver();
@@ -28,19 +27,19 @@ public class loginTest {
         Thread.sleep(5000);
         driver.get("https://www.saucedemo.com/");
         driver.manage().window().maximize();
-        System.out.println(driver.getTitle());
     }
 
-    @Test
-    public void check1() throws InterruptedException {
+    @Test(priority = 1)
+    public void D_login_Check() {
         l = new login(driver);
+        l.get_details();
         l.username();
         l.setPassword();
         l.click();
     }
 
-    @Test
-    public void check2()
+    @Test(priority = 2)
+    public void C_High_Price()
     {
         h =new HomePage(driver);
         c=new CartPage(driver);
@@ -49,6 +48,7 @@ public class loginTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         h.addtocart_enabled(high);
         h.AddtoCart(high);
         h.remove_enabled(high);
@@ -58,24 +58,22 @@ public class loginTest {
         c.click_continue_to_shopping();
     }
 
-    @Test
-    public void check3(){
-        h =new HomePage(driver);
-        c=new CartPage(driver);
+    @Test(priority = 3)
+    public void B_Low_Price(){
         try {
             low=h.getlowerprice();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        h.addtocart_enabled(low);
         h.AddtoCart(low);
         h.click_Cart();
     }
 
-    @Test
-    public void check4(){
+    @Test(priority = 4)
+    public void A_Check_out(){
         c=new CartPage(driver);
         c.check_out();
+        c.Get_Details();
         c.first_name();
         c.last_name();
         c.pincode();
@@ -84,7 +82,7 @@ public class loginTest {
         c.Msg();
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void end(){
         driver.quit();
     }

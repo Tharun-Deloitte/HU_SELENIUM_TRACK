@@ -3,9 +3,6 @@ package Assignment_4;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,22 +37,13 @@ public class HomePage {
                 check=price;
                 j=i;
             }
-            System.out.println(check);
         }
         return  j;
     }
 
 
     public int getlowerprice() throws InterruptedException {
-        List<WebElement> li;
         List<WebElement> pr;
-
-        li = driver.findElements(By.xpath("//div[@class='inventory_item_name']"));
-        for (WebElement webElement : li) {
-            String str = webElement.getText();
-            System.out.println(str.replace(" ", "-").toLowerCase());
-        }
-        System.out.println(name);
         pr = driver.findElements(By.xpath("//div[@class='inventory_item_price']"));
         Thread.sleep(3000);
         float check=100;
@@ -67,7 +55,6 @@ public class HomePage {
                 check=price;
                 j=i;
             }
-            System.out.println(check);
         }
         return  j;
     }
@@ -78,7 +65,6 @@ public class HomePage {
     }
 
     public void remove(int j){
-
         driver.findElement(By.xpath("//button[@id='remove-"+name.get(j)+"']")).click();
     }
 
@@ -89,10 +75,10 @@ public class HomePage {
 
     public void remove_enabled(int j){
         {
+
             try{
                 WebElement e1=driver.findElement(By.xpath("//button[@id='remove-"+name.get(j)+"']"));
-                WebDriverWait wait = new WebDriverWait(driver, 6);
-                wait.until(ExpectedConditions.elementToBeClickable(e1));
+                e1.isEnabled();
                 System.out.println("Remove is clickable");
             }
             catch (Exception e){
@@ -104,8 +90,7 @@ public class HomePage {
         {
             try{
                 WebElement e1=driver.findElement(By.xpath("//button[@id='add-to-cart-"+name.get(j)+"']"));
-                WebDriverWait wait = new WebDriverWait(driver, 6);
-                wait.until(ExpectedConditions.elementToBeClickable(e1));
+                e1.isEnabled();
                 System.out.println("Add to cart is clickable");
             }
             catch (Exception e){

@@ -12,16 +12,21 @@ public class login {
     By button = By.xpath("//input[@id='login-button']");
     By username = By.xpath("//input[@id='user-name']");
     By password = By.xpath("//input[@id='password']");
+    String UN;
+    String Pass;
     ExcelData xls1;
-    {
+
+    public void get_details(){
         try {
-            xls1 = new ExcelData("C:\\Users\\naratreddy\\IdeaProjects\\Login.xlsx");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                xls1 = new ExcelData("C:\\Users\\naratreddy\\IdeaProjects\\Login.xlsx");
+            }
+        catch (IOException e) {
+                e.printStackTrace();
+            }
+        UN = xls1.getData(0,1,0);
+        Pass = xls1.getData(0,1,1);
     }
-    String UN = xls1.getData(0,1,0);
-    String Pass = xls1.getData(0,1,1);
+
 
 
 

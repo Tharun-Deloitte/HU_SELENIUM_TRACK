@@ -16,7 +16,7 @@ public class ExcelData {
         wb = new XSSFWorkbook(fis);
     }
     public String getData(int sheetno, int row, int column){
-        sheet1 = wb.getSheetAt(0);
+        sheet1 = wb.getSheetAt(sheetno);
         String data = sheet1.getRow(row).getCell(column).getStringCellValue();
         return data;
     }

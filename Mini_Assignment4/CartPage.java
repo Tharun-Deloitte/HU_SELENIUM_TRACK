@@ -2,6 +2,7 @@ package Assignment_4;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.io.Zip;
 
 import java.io.IOException;
 
@@ -13,20 +14,21 @@ public class CartPage {
     By Firstname=By.xpath("//input[@id='first-name']");
     By Lastname=By.xpath("//input[@id='last-name']");
     By pin=By.xpath("//input[@id='postal-code']");
-    By cont=By.xpath("//button[@id='continue']");
+    By cont=By.xpath("//input[@id='continue']");
     By finish=By.xpath("//button[@id='finish']");
     By thankYouMessage = By.xpath("//*[@id='checkout_complete_container']/h2");
     ExcelData xls1;
-    {
+    String Name,lastname,ZipCode;
+    public void Get_Details() {
         try {
             xls1 = new ExcelData("C:\\Users\\naratreddy\\IdeaProjects\\Login.xlsx");
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Name = xls1.getData(1, 0, 0);
+        lastname = xls1.getData(1, 1, 0);
+        ZipCode = xls1.getData(1, 2, 0);
     }
-    String FirstName = xls1.getData(1,0,0);
-    String LastName = xls1.getData(1,1,0);
-    String ZipCode = xls1.getData(1,2,0);
 
     public CartPage(WebDriver driver){
         this.driver=driver;
@@ -42,11 +44,11 @@ public class CartPage {
     }
 
     public void first_name(){
-        driver.findElement(Firstname).sendKeys(FirstName);
+        driver.findElement(Firstname).sendKeys(Name);
     }
 
     public void last_name(){
-        driver.findElement(Lastname).sendKeys(LastName);
+        driver.findElement(Lastname).sendKeys(lastname);
     }
 
     public void pincode(){
